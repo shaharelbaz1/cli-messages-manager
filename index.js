@@ -11,31 +11,26 @@ var argv = require('yargs').
 //         type: 'string',
 //         demandOption: true
 //    }).
-   option('r1', {
+   option('retrieveID', {
        alias : 'getMessageByID',
        describe: 'Get message by ID',
        type: 'string',
    }).
-   option('r2', {
-       alias : 'getMessageBySender',
-       describe: 'Get message by sender',
-       type: 'string',
-   }).
-   option('r3', {
+   option('retrieve', {
        alias : 'getMessagesList',
        describe: 'Get message list',
    }).
-   option('c', {
+   option('create', {
        alias : 'createMessage',
        describe: 'Create a message, input params- message, sender, recipient',
        type: 'array',
    }).
-   option('u', {
+   option('update', {
        alias : 'updateMessage',
        describe: 'Update a message, input params- message id, message, sender, recipient',
        type: 'array',
    }).
-   option('d', {
+   option('delete', {
        alias : 'deleteMessage',
        describe: 'Delete message',
        type: 'string',
@@ -43,24 +38,19 @@ var argv = require('yargs').
    .usage('Usage: Message Manager API')
    .argv;
 
-if (yargs.argv.url){
-    URL = yargs.argv.url;
+
+if (yargs.argv.retrieveID){
+    requests.getMessageByID(yargs.argv.retrieveID);
 }
-if (yargs.argv.r1){
-    requests.getMessageByID(yargs.argv.r1);
-}
-if (yargs.argv.r2){
-    requests.getMessageBySender(yargs.argv.r2);
-}
-if (yargs.argv.r3){
+if (yargs.argv.retrieve){
     requests.getMessagesList();
 }
-if (yargs.argv.c){
-    requests.createMessage(yargs.argv.c);
+if (yargs.argv.create){
+    requests.createMessage(yargs.argv.create);
 }
-if (yargs.argv.u){
-    requests.updateMessage(yargs.argv.u);
+if (yargs.argv.update){
+    requests.updateMessage(yargs.argv.update);
 }
-if (yargs.argv.d){
-    requests.deleteMessage(yargs.argv.d);
+if (yargs.argv.delete){
+    requests.deleteMessage(yargs.argv.delete);
 }

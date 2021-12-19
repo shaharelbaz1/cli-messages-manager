@@ -1,7 +1,7 @@
 const axios = require('axios');
 
   function getMessageByID(id) {
-    axios.get('http://localhost:3000/api/messages/getMessagesById/'+id)
+    axios.get('http://localhost:3000/api/messages/'+id)
     .then(function (response) {
       console.log("\ngetMessageByID: ".cyan)
       console.log(response.data ? response.data : "no data");
@@ -12,20 +12,8 @@ const axios = require('axios');
     })
   }
 
-  function getMessageBySender(sender) {
-    axios.get('http://localhost:3000/api/messages/getMessagesBySender/'+sender)
-    .then(function (response) {
-      console.log("\ngetMessageBySender: ".cyan)
-      console.log(response.data ? response.data : "no data");
-    })
-    .catch(function (error) {
-      console.log("\ngetMessageBySender: ".red)
-      console.error(error && error.response && error.response.data ? error.response.data : 'undefined error');
-    })
-  }
-
   function getMessagesList() {
-    axios.get('http://localhost:3000/api/messages/getMessagesList')
+    axios.get('http://localhost:3000/api/messages')
     .then(function (response) {
       console.log("\ngetMessagesList: ".cyan)
       console.log(response.data ? response.data : "no data");
@@ -37,7 +25,7 @@ const axios = require('axios');
   }
 
   function createMessage(messageArray) {
-    axios.post('http://localhost:3000/api/messages/createMessage/', {
+    axios.post('http://localhost:3000/api/messages/', {
         message: messageArray[0] ? messageArray[0] : null,
         sender: messageArray[1] ? messageArray[1] : null,
         recipient: messageArray[2] ? messageArray[2] : null
@@ -54,7 +42,7 @@ const axios = require('axios');
 
   function updateMessage(messageArray) {
     var id = messageArray[0] ? messageArray[0] : '';
-    axios.put('http://localhost:3000/api/messages/updateMessage/' + id,{
+    axios.put('http://localhost:3000/api/messages/' + id,{
         message: messageArray[1] ? messageArray[1] : null,
         sender: messageArray[2] ? messageArray[2] : null,
         recipient: messageArray[3] ? messageArray[3] : null
@@ -70,7 +58,7 @@ const axios = require('axios');
   }
 
   function deleteMessage(id) {
-    axios.delete('http://localhost:3000/api/messages/deleteMessage/'+id)
+    axios.delete('http://localhost:3000/api/messages/'+id)
     .then(function (response) {
       console.log("\ndeleteMessage: ".cyan)
       console.log(response.data);
@@ -83,7 +71,6 @@ const axios = require('axios');
 
   module.exports = {
     getMessageByID,
-    getMessageBySender,
     getMessagesList,
     createMessage,
     updateMessage,
